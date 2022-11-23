@@ -5,32 +5,6 @@ class paylist {
         this.고정지출내역 = 고정지출내역;
     }
 }
-<<<<<<< HEAD
-let picklist = new paylist({
-    카카오톡자전거: '1500원',
-    택시: '3500원',
-}, {
-    엔시나: '4500원',
-    카누: '200원',
-}, {
-    닭고기: '400원',
-    락토프리우유: '800원',
-});
-let pickreceipe = new paylist({
-    카카오톡자전거: '19회',
-    택시: '3회',
-}, {
-    엔시나: '6잔',
-    카누: '15잔',
-}, {
-    닭고기: '30개',
-    락토프리우유: '2개',
-});
-// --------------------------------------------------------------
-// console.log(picklist, pickreceipe);
-const commingsoon = (list1, list2) => {
-    let { 출퇴근비용, 커피, 고양이간식 } = list1;
-=======
 const pays = {
     출퇴근비용: {
         카카오톡자전거: '1500원',
@@ -102,7 +76,6 @@ const commingsoon = (lists) => {
     let counts = [];
     let getup_count = 0;
     let coffe_count = 0;
-    
     while (need >= 0) {
         let rannum = Math.floor(Math.random() * 3);
         let rannum2 = Math.floor(Math.random() * (6 - 1) + 1);
@@ -120,8 +93,9 @@ const commingsoon = (lists) => {
             아끼는금액: arr6[rannum] * rannum2,
         });
     }
+    //어떻게 0에 딱 맞아 떨어지도록 해야할지 모르겠음...
+    //원장님 카드는 도대체 무슨 이벤트로 처리해야 할지 모르겠음.
     console.log(counts);
->>>>>>> 2c8f768537a5b09beceac286167d1d072a4fcc60
     return '';
 };
 console.log(commingsoon(picklist));
