@@ -3,7 +3,7 @@ const shape_array = ['spade', 'heart', 'diamond', 'club', 'joker'];
 const trump_deck = (shapeArray) => {
     let trumps = {};
     let value = [];
-    trumps.shape_array[0] = 1;
+    // new trumps.shape_array[0] = 1;
     // for (let i = 0; i < 15; i++) {
     //   value.push(String(i));
     //   value[0] === '1'
