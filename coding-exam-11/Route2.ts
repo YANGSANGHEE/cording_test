@@ -11,7 +11,7 @@ const ServerSet: ServerSet = (tag, style, href) => {
   return `
     ${head}
     <body style='display:flex; flex-direction:column; align-items:center; justify-content:center;'>
-      <h1 style="${style} text-align:center;">${tag}</h1>
+      <h1 style="${style} text-align:center;">${tag}입니다.</h1>
       <button onclick="location.href='http://localhost:8282/${href}'">공욱재미남</button>
     </body>`;
 };
@@ -24,16 +24,17 @@ const Server = http.createServer(
     if (req.method === 'GET') {
       switch (path) {
         case '/':
-          res.end(ServerSet('Home 입니다.', 'color:coral; ', 'about'));
+          res.end(ServerSet('Home', 'color:coral; ', 'about'));
           break;
         case '/about':
-          res.end(ServerSet('about 입니다.', 'color:green;', 'contact'));
+          res.end(ServerSet('about', 'color:green;', 'contact'));
           break;
         case '/contact':
-          res.end(ServerSet('contact 입니다.', 'color:pink;', ''));
+          res.end(ServerSet('contact', 'color:pink;', ''));
           break;
         default:
-          res.end('<h1>404 NOT FOUND</h1>');
+          res.statusCode = 404;
+          res.end('<h1>NOT FOUND</h1>');
           break;
       }
     }
