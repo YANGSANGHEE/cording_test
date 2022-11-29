@@ -12,7 +12,9 @@ const ServerSet = (tag, style, href) => {
     align-items:center; 
     justify-content:center; 
     background-color:${style}'>
-      <h1 style="color:white; text-align:center;">${tag} 입니다.</h1>
+      <h1 style="color:white; text-align:center;">
+      ${tag} 입니다.
+      </h1>
       <button onclick="location.href='http://localhost:8080/${href}'">공욱재미남</button>
     </body>`
   }
@@ -35,6 +37,7 @@ const Server = http.createServer((req, res) => { // 순서 잘 맞추기(요청=
         res.end(ServerSet('contact', 'hotpink', ''));
         break;
       default:
+        res.statusCode = 404;
         res.end(ServerSet('404 Error 메롱'))
         break;
     }
