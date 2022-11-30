@@ -1,0 +1,3 @@
+<form action ='/get_post' method='POST' style='display:flex; flex-direction:column; align-items:flex-start; justify-content:center;'>
+  <input type='text' name='titles' placeholder='title'>
+  <textarea name='description' placeholder='description'></textarea>

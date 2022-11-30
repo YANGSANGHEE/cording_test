@@ -1,5 +1,0 @@
-<form action ='/get_post' method='post'>
-  <p><input type='text' name = 'title' placeholder='title'></p>
-  <p><textarea name = 'description' placeholder='description'></p>
-  <p><input type='submit'></p>
-</form>

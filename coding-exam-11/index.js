@@ -20,7 +20,7 @@ const server = http.createServer((req, res) => {
       }
     }
     res.end(`
-    ${readfile(['header', 'main', 'footer'])}
+    ${readfile(['header', 'main'])}
     `
     )
   }
