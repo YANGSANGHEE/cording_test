@@ -26,7 +26,7 @@ class dirFileToJson {
       });
       //파일리스트 배열화
       let Settxt = GetFileArr.map((value) => {
-        return [value.split('.')[0], fs.readFileSync(`./${this.fileDoc}/${value}`, this.charset)]
+        return [value.split('.')[0], fs.readFileSync(`${this.fileDoc}/${value}`, this.charset)]
       })
       //파일리스트 object화 하기위한 map
       Settxt.forEach((value) => {
@@ -51,26 +51,26 @@ class SetWriteHead {
 }
 
 const MakeDoc = (fileName) => {
-  let FileArr = new Array(3)
+  let FileArr = []
+  let body
   if (typeof fileName === 'string') {
     if (fileName.includes('.json')) {
       let Parse = JSON.parse(fs.readFileSync(fileName, 'utf-8'))
-      for (let i in Parse) {
-        switch (i) {
-          case 'header':
-            FileArr[0] = Parse[i];
-            break;
-          case 'main':
-            FileArr[1] = Parse[i];
-            break;
-          case 'footer':
-            FileArr[2] = Parse[i];
-            break;
-        }
-      }
-      fs.writeFileSync(`./TestFiles/body.txt`, FileArr.join(''), 'utf8');
-      let body = fs.readFileSync(`./TestFiles/body.txt`, 'utf8');
-      return `${Parse.head}${body}`
+      return new Promise((resolve) => {
+        FileArr.push(Parse['header'])
+        resolve(Parse['main'])
+      }).then((value) => {
+        // console.log(value)
+        FileArr.push(value)
+        // console.log(FileArr)
+        return Parse['footer'] // 왜 resolve는 안담기고 return은 되는가 ... ?
+      }).then((value2) => {
+        FileArr.push(value2)
+        // console.log(value2)
+        fs.writeFileSync(`./TestFiles/body.txt`, FileArr.join(''), 'utf8');
+        body = fs.readFileSync(`./TestFiles/body.txt`, 'utf8');
+        return `${Parse.head}${body}`
+      });
     }
   }
 }

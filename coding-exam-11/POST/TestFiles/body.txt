@@ -1,0 +1,5 @@
+<ul><li>메뉴</li></ul><form action ='/start_post' method='POST' style='display:flex; flex-direction:column; align-items:flex-start; justify-content:center;'>
+  <input type='text' name='titles' placeholder='title'>
+  <textarea name='description' placeholder='description'></textarea>
+  <input type='submit' value='제발되라'>
+</form><footer>kdt 클래스</footer>

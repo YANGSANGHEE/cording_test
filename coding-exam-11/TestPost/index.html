@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form method="POST" action="/get_post" id="Setform">
+    <span>이름</span>
+    <input type="text" name='name'>
+    <span>나이</span>
+    <input type="text" name='age'>
+    <span>자기소개</span>
+    <textarea name="desc" placeholder="desc" id="desc" onkeypress=""></textarea>
+    <button type="submit" id="submit">전송</button>
+  </form>
+  <script>
+    let txtarea = document.getElementById('desc');
+    let submit = document.getElementById('submit')
+
+    txtarea.addEventListener('keydown', (e) => {
+      if (e.keyCode == 13) {
+        //keycode 13 == enter
+        e.preventDefault();
+        //고유의 이벤트나 동작을 막음
+        submit.click()
+      }
+    })
+  </script>
+</body>
+
+</html>

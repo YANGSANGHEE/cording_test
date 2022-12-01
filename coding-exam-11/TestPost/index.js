@@ -25,40 +25,40 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const http = __importStar(require("http"));
 const fs = __importStar(require("fs"));
-const Port = process.env.Port || 8282;
-const ServerSet = (tag, style, href) => {
-    let head = fs.readFileSync('head.txt', 'utf8');
-    return `
-    ${head}
-    <body style='display:flex; flex-direction:column; align-items:center; justify-content:center;'>
-      <h1 style="${style} text-align:center;">${tag}</h1>
-      <button onclick="location.href='http://localhost:8282/${href}'">공욱재미남</button>
-    </body>`;
-};
-const Server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' });
-    let path = req.url;
-    if (req.method === 'GET') {
-        switch (path) {
-            case '/':
-                res.end(ServerSet('Home 입니다.', 'color:coral; ', 'about'));
+const qs = __importStar(require("querystring"));
+const modules_1 = require("./modules");
+const Port = process.env.Port || 5580;
+http
+    .createServer((req, res) => {
+        res.writeHead(200, { 'Content-Type': 'text/html;cahrset=utf-8' });
+        let url = req.url;
+        let Databody = '';
+        switch (url) {
+            case req.method === 'GET' ? '/' : null:
+                fs.readFile('./index.html', 'utf8', (err, data) => {
+                    if (err)
+                        throw err;
+                    res.end(data);
+                });
                 break;
-            case '/about':
-                res.end(ServerSet('about 입니다.', 'color:green;', 'contact'));
-                break;
-            case '/contact':
-                res.end(ServerSet('contact 입니다.', 'color:pink;', ''));
+            case req.method === 'POST' ? '/get_post' : null:
+                req.on('data', (data) => {
+                    Databody += data;
+                    console.log(Databody);
+                });
+                req.on('end', () => {
+                    let Con = qs.parse(Databody);
+                    new modules_1.objTojson(Con, 'infos').ToJson();
+                    res.end(`${new modules_1.objTojson(Con, '')}`);
+                });
                 break;
             default:
                 res.statusCode = 404;
-                res.end('<h1>404 NOT FOUND</h1>');
-                break;
+                res.end('404 not found');
         }
-    }
-});
-Server.listen(Port, (err) => {
-    // 에러처리
-    if (err)
-        throw err;
-    console.log(`Start Server ${Port} `);
-});
+    })
+    .listen(Port, (err) => {
+        if (err)
+            throw err;
+        console.log(`Start Server ${Port}`);
+    });
